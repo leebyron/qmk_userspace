@@ -1,5 +1,5 @@
 #include QMK_KEYBOARD_H
-#include "features/shift_override.h"
+#include "features/mod_override.h"
 
 // TODOs:
 //   - Tap dance mods on the zxcv nav layer
@@ -28,6 +28,8 @@ enum custom_keycodes {
 // Thumb keys
 #define ALT_TAB   ALT_T(KC_TAB)
 #define CMD_BKSP  CMD_T(KC_BSPC)
+#define CMD_SPACE CMD_T(KC_SPACE)
+#define CMD_ENTER CMD_T(KC_ENTER)
 #define _SHIFT_   OSM(MOD_LSFT)
 #define CTRL_ENT  CTL_T(KC_ENT)
 // Main lower row mods
@@ -81,23 +83,25 @@ enum custom_keycodes {
 // 	NULL // terminated array
 // };
 
-// Shift-overrides to further customize the SHIFT and SLIDE+SHIFT layers.
-const shift_override_t shift_overrides[] = {
-  {ALT_COMMA, KC_SEMICOLON},
-  {CTRL_DOT,KC_COLON},
-  {KC_KP_0, KC_KP_DOT},
-  {KC_KP_9, KC_KP_SLASH},
-  {KC_LEFT_PAREN, KC_RIGHT_PAREN},
-  {KC_LEFT_CURLY_BRACE, KC_RIGHT_CURLY_BRACE},
-  {KC_LEFT_ANGLE_BRACKET, KC_RIGHT_ANGLE_BRACKET},
-  END_OF_SHIFT_OVERRIDES
+// Mod-overrides to further customize the SHIFT and SLIDE+SHIFT layers.
+const mod_override_t mod_overrides[] = {
+  {MOD_MASK_GUI,   CMD_BKSP, KC_DELETE},
+  {MOD_MASK_SHIFT, ALT_COMMA, KC_SEMICOLON},
+  {MOD_MASK_SHIFT, CTRL_DOT, KC_COLON},
+  {MOD_MASK_SHIFT, KC_KP_0, KC_KP_DOT},
+  {MOD_MASK_SHIFT, KC_KP_9, KC_KP_SLASH},
+  {MOD_MASK_SHIFT, KC_LEFT_PAREN, KC_RIGHT_PAREN},
+  {MOD_MASK_SHIFT, KC_LEFT_CURLY_BRACE, KC_RIGHT_CURLY_BRACE},
+  {MOD_MASK_SHIFT, KC_LEFT_ANGLE_BRACKET, KC_RIGHT_ANGLE_BRACKET},
+  END_OF_MOD_OVERRIDES
 };
 
 // Combos
-const uint16_t PROGMEM combo_df[] = {KC_D, KC_F, COMBO_END};
-const uint16_t PROGMEM combo_cv[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM combo_jk[] = {KC_J, KC_K, COMBO_END};
-const uint16_t PROGMEM combo_mc[] = {KC_M, KC_COMM, COMBO_END};
+#define COMBO_KC(name, ...) const uint16_t PROGMEM name[] = {__VA_ARGS__, COMBO_END}
+COMBO_KC(combo_df, KC_D, KC_F);
+COMBO_KC(combo_cv, KC_C, KC_V);
+COMBO_KC(combo_jk, KC_J, KC_K);
+COMBO_KC(combo_mc, KC_M, KC_COMM);
 combo_t key_combos[] = {
     COMBO(combo_df, KC_LEFT_PAREN),
     COMBO(combo_cv, KC_RIGHT_PAREN),
@@ -111,13 +115,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     XXXXXXX,            XXXXXXX,  KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,
     KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     XXXXXXX,            XXXXXXX,  KC_H,     KC_J,     KC_K,     KC_L,     HYPR_QUOT,
     SHIFT_Z,  CTRL_X,   ALT_C,    CMD_V,    KC_B,     BRO_SYS,            BRC_SYS,  KC_N,     CMD_M,    ALT_COMMA,CTRL_DOT, SHFT_SLSH,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  ALT_TAB,  CMD_BKSP, _SLIDE_,            _SHIFT_,  KC_SPACE, CTRL_ENT, XXXXXXX,  XXXXXXX,  XXXXXXX),
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  ALT_TAB,  CMD_BKSP, _SLIDE_,            _SHIFT_,  CMD_SPACE,CTRL_ENT, XXXXXXX,  XXXXXXX,  XXXXXXX),
 
   [LAYER_SLIDE] = LAYOUT_ortho_4x12(
     KC_TAB,   KC_LBRC,  KC_UP,    KC_RBRC,  KC_BRACE, XXXXXXX,            XXXXXXX,  KC_PPLS,  KC_7,     KC_8,     KC_P9,    KC_GRV,
     SYS_ESC,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_PAREN, XXXXXXX,            XXXXXXX,  KC_MINS,  KC_4,     KC_5,     KC_6,     KC_P0,
     UNDO,     CUT,      COPY,     PASTE,    KC_ANGLE, KC_LPRN,            KC_RPRN,  KC_EQUAL, CMD_1,    ALT_2,    CTRL_3,   SHFT_BKSL,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  _______,            _______,  KC_ENTER, _______,  XXXXXXX,  XXXXXXX,  XXXXXXX),
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  _______,            _______,  CMD_ENTER,_______,  XXXXXXX,  XXXXXXX,  XXXXXXX),
 
   [LAYER_SYS] = LAYOUT_ortho_4x12(
     QK_BOOT,  KC_BRID,  KC_PGUP,  KC_BRIU,  KC_MFFD,  XXXXXXX,            XXXXXXX,  KC_VOLU,  KC_F7,    KC_F8,    KC_F9,    KC_F10,
@@ -235,14 +239,14 @@ void check_timeout_slide(uint16_t moment) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (!process_shift_overrides(keycode, record)) return false;
+  if (!process_mod_overrides(keycode, record)) return false;
 
   switch (keycode) {
-  case LINE_SEL:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LGUI(SS_TAP(X_LEFT)SS_LSFT(SS_TAP(X_RGHT)SS_TAP(X_RGHT))));
-    }
-    break;
+  // case LINE_SEL:
+  //   if (record->event.pressed) {
+  //     SEND_STRING(SS_LGUI(SS_TAP(X_LEFT)SS_LSFT(SS_TAP(X_RGHT)SS_TAP(X_RGHT))));
+  //   }
+  //   break;
   case _SLIDE_:
     process_slide(keycode, record);
     break;
