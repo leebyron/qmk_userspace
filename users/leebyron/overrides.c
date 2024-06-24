@@ -1,0 +1,15 @@
+#include "features/mod_override.h"
+#include "keycodes.h"
+
+// Mod-overrides to further customize the SHIFT and SLIDE+SHIFT layers.
+const mod_override_t mod_overrides[] = {
+  {MOD_MASK_GUI,   CMD_BKSP, KC_DELETE},
+  {MOD_MASK_SHIFT, ALT_COMMA, KC_SEMICOLON},
+  {MOD_MASK_SHIFT, CTRL_DOT, KC_COLON},
+  {MOD_MASK_SHIFT, KC_KP_0, KC_KP_DOT},
+  {MOD_MASK_SHIFT, KC_KP_9, KC_KP_SLASH},
+  {MOD_MASK_SHIFT, KC_LEFT_PAREN, KC_RIGHT_PAREN},
+  {MOD_MASK_SHIFT, KC_LEFT_CURLY_BRACE, KC_RIGHT_CURLY_BRACE},
+  {MOD_MASK_SHIFT, KC_LEFT_ANGLE_BRACKET, KC_RIGHT_ANGLE_BRACKET},
+  END_OF_MOD_OVERRIDES
+};

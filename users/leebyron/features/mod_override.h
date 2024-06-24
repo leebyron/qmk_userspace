@@ -9,6 +9,8 @@ typedef struct {
 
 #define END_OF_MOD_OVERRIDES {0,0,0}
 
-extern const mod_override_t mod_overrides[];
-
 bool process_mod_overrides(uint16_t keycode, keyrecord_t *record);
+
+// Define this in your keymap as an array of {mod, keycode, replacement_code}
+// ending with END_OF_MOD_OVERRIDES
+extern const mod_override_t mod_overrides[];
