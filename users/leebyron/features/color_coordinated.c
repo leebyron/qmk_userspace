@@ -4,6 +4,7 @@
 // This highlights arrows and numpads when they are available, it also highlights
 // the LSHIFT key based on which state it's in (held, OSM, caps-word).
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+  uint8_t current_layer = get_highest_layer(layer_state);
   for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
     for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
       uint8_t index = g_led_config.matrix_co[row][col];
@@ -19,6 +20,12 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
           } else if (get_oneshot_mods() & MOD_MASK_SHIFT) {
             rgb_matrix_set_color(index, RGB_RED);
           }
+        } else if (IS_QK_ONE_SHOT_LAYER(keycode)) {
+          if (IS_LAYER_ON(QK_ONE_SHOT_LAYER_GET_LAYER(keycode))) {
+            rgb_matrix_set_color(index, RGB_GREEN);
+          } else {
+            rgb_matrix_set_color(index, RGB_BLUE);
+          }
         }
         // Otherwise get the basic keycode
         if (IS_QK_MOD_TAP(keycode) || IS_QK_LAYER_TAP(keycode)) {
@@ -27,15 +34,18 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         if (keycode == XXXXXXX)  {
           // Black out dead keys
           rgb_matrix_set_color(index, RGB_OFF);
-        } else if (keycode >= KC_RIGHT && keycode <= KC_UP) {
-          // Color in arrows
-          rgb_matrix_set_color(index, RGB_CYAN);
-        } else if ((keycode >= KC_1 && keycode <= KC_0) || (keycode >= KC_P1 && keycode <= KC_P0)) {
-          // Color in numbers
-          rgb_matrix_set_color(index, RGB_GOLDENROD);
-        } else if (keycode >= KC_F1 && keycode <= KC_F12) {
-          // Color in functions
-          rgb_matrix_set_color(index, RGB_RED);
+        } else if (current_layer > 0) {
+          // On higher layers draw in regions
+          if (keycode >= KC_RIGHT && keycode <= KC_UP && current_layer > 0) {
+            // Color in arrows
+            rgb_matrix_set_color(index, RGB_CYAN);
+          } else if ((keycode >= KC_1 && keycode <= KC_0) || (keycode >= KC_P1 && keycode <= KC_P0)) {
+            // Color in numbers on higher layers
+            rgb_matrix_set_color(index, RGB_GOLDENROD);
+          } else if (keycode >= KC_F1 && keycode <= KC_F12) {
+            // Color in functions
+            rgb_matrix_set_color(index, RGB_RED);
+          }
         }
       }
     }

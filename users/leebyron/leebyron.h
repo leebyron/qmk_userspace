@@ -45,7 +45,7 @@
 #define SLIDE_MID_5C_R    KC_MINS,  KC_4,     KC_5,     KC_6,     HYPR_TICK
 #define SLIDE_BOT_5C_R    KC_EQUAL, CMD_1,    ALT_2,    CTRL_3,   SHFT_BKSL
 #define SLIDE_NUM_6C_R    SLIDE_NUM_5C_R,     KC_F11
-#define SLIDE_TOP_6C_R    SLIDE_TOP_5C_R,     _______
+#define SLIDE_TOP_6C_R    SLIDE_TOP_5C_R,     KC_F12
 #define SLIDE_MID_6C_R    SLIDE_MID_5C_R,     _______
 #define SLIDE_BOT_6C_R    SLIDE_BOT_5C_R,     RSFT_T(KC_RBRC)
 
@@ -70,7 +70,7 @@
 #define SYS_MID_5C_R      KC_VOLD,  KC_F4,    KC_F5,    KC_F6,    KC_F11
 #define SYS_BOT_5C_R      KC_MUTE,  KC_F1,    KC_F2,    KC_F3,    KC_F12
 #define SYS_NUM_6C_R      SYS_NUM_5C_R,       RGB_MOD
-#define SYS_TOP_6C_R      SYS_TOP_5C_R,       _______
+#define SYS_TOP_6C_R      SYS_TOP_5C_R,       RGB_TOG
 #define SYS_MID_6C_R      SYS_MID_5C_R,       _______
 #define SYS_BOT_6C_R      SYS_BOT_5C_R,       _______
 

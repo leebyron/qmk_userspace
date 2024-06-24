@@ -9,6 +9,7 @@
 //   - Oryx & 6th columns
 //   - Inner column keys
 //   - Draw it out
+//   - Color-coordinated should show layer status for OSL keys
 
 // TODO: this must have a better way to do this
 KEY_COMBOS()
