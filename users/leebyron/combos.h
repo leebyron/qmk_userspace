@@ -78,7 +78,6 @@ combo_t key_combos[] = {\
   COMBO(combo_ds, KC_QUESTION),\
   // Both hands
   COMBO(combo_vj, MCR_SGL_ARROW),\
-  COMBO(combo_cj, MCR_SGL_ARROW_L),\
   COMBO(combo_vm, MCR_DBL_ARROW),\
   COMBO(combo_cm, MCR_LESS_THAN),\
   COMBO(combo_bm, MCR_GREATER_THAN),\

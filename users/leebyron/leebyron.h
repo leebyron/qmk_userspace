@@ -5,6 +5,8 @@
 #include "keycodes.h"
 #include "combos.h"
 
+#define KEYMAP(LAYOUT, ...) LAYOUT(__VA_ARGS__)
+
 // Main layer
 #define MAIN_NUM_5C_L               KC_1,     KC_2,     KC_3,     KC_4,     KC_5
 #define MAIN_TOP_5C_L               KC_Q,     KC_W,     KC_E,     KC_R,     KC_T
