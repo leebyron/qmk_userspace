@@ -38,6 +38,11 @@ bool process_macros(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("->");
       }
       break;
+    case MCR_SGL_ARROW_L:
+      if (record->event.pressed) {
+        SEND_STRING("<-");
+      }
+      break;
     case MCR_DBL_ARROW:
       if (record->event.pressed) {
         SEND_STRING("=>");

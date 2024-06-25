@@ -40,6 +40,7 @@ COMBO_KC(combo_md, CMD_M, CTRL_DOT);\
 COMBO_KC(combo_ds, CTRL_DOT, SHFT_SLSH);\
 // Both hands
 COMBO_KC(combo_vj, CMD_V, KC_J);\
+COMBO_KC(combo_cj, ALT_C, KC_J);\
 COMBO_KC(combo_vm, CMD_V, CMD_M);\
 COMBO_KC(combo_cm, ALT_C, CMD_M);\
 COMBO_KC(combo_bm, KC_B, CMD_M);\
@@ -77,6 +78,7 @@ combo_t key_combos[] = {\
   COMBO(combo_ds, KC_QUESTION),\
   // Both hands
   COMBO(combo_vj, MCR_SGL_ARROW),\
+  COMBO(combo_cj, MCR_SGL_ARROW_L),\
   COMBO(combo_vm, MCR_DBL_ARROW),\
   COMBO(combo_cm, MCR_LESS_THAN),\
   COMBO(combo_bm, MCR_GREATER_THAN),\
