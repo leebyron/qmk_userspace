@@ -5,6 +5,7 @@
 #include "keycodes.h"
 #include "combos.h"
 
+#define MOD_RETRO_TIMEOUT 500
 #define KEYMAP(LAYOUT, ...) LAYOUT(__VA_ARGS__)
 
 // Main layer
@@ -13,9 +14,9 @@
 #define MAIN_MID_5C_L               KC_A,     KC_S,     KC_D,     KC_F,     KC_G
 #define MAIN_BOT_5C_L               SHIFT_Z,  CTRL_X,   ALT_C,    CMD_V,    KC_B
 #define MAIN_NUM_6C_L     KC_GRAVE, MAIN_NUM_5C_L
-#define MAIN_TOP_6C_L     KC_TAB,   MAIN_TOP_5C_L
-#define MAIN_MID_6C_L     KC_ESC,   MAIN_MID_5C_L
-#define MAIN_BOT_6C_L     QK_SPACE_CADET_LEFT_SHIFT_PARENTHESIS_OPEN,  MAIN_BOT_5C_L
+#define MAIN_TOP_6C_L     SYS_TAB,  MAIN_TOP_5C_L
+#define MAIN_MID_6C_L     CTRL_ESC, MAIN_MID_5C_L
+#define MAIN_BOT_6C_L     L_SPACECDT,MAIN_BOT_5C_L
 
 #define MAIN_NUM_5C_R     KC_6,     KC_7,     KC_8,     KC_9,     KC_0
 #define MAIN_TOP_5C_R     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P
@@ -23,8 +24,8 @@
 #define MAIN_BOT_5C_R     KC_N,     CMD_M,    ALT_COMMA,CTRL_DOT, SHFT_SLSH
 #define MAIN_NUM_6C_R     MAIN_NUM_5C_R,      KC_EQUAL
 #define MAIN_TOP_6C_R     MAIN_TOP_5C_R,      KC_MINS
-#define MAIN_MID_6C_R     MAIN_MID_5C_R,      MT(MOD_RHYPR, KC_ENTER)
-#define MAIN_BOT_6C_R     MAIN_BOT_5C_R,      QK_SPACE_CADET_RIGHT_SHIFT_PARENTHESIS_CLOSE
+#define MAIN_MID_6C_R     MAIN_MID_5C_R,      HYPR_ENT
+#define MAIN_BOT_6C_R     MAIN_BOT_5C_R,      R_SPACECDT
 
 #define MAIN_THM_2C_L               CMD_BKSP, _SLIDE_
 #define MAIN_THM_3C_L     ALT_TAB,  MAIN_THM_2C_L
@@ -34,13 +35,13 @@
 
 // Slide layer
 #define SLIDE_NUM_5C_L              KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5
-#define SLIDE_TOP_5C_L              KC_TAB,   KC_LBRC,  KC_UP,    KC_RBRC,  KC_BRACE
-#define SLIDE_MID_5C_L              SYS_ESC,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_PAREN
-#define SLIDE_BOT_5C_L              UNDO,     CUT,      COPY,     PASTE,    KC_ANGLE
+#define SLIDE_TOP_5C_L              SYS_TAB,  KC_LBRC,  KC_UP,    KC_RBRC,  KC_BRACE
+#define SLIDE_MID_5C_L              FN_ESC,   KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_PAREN
+#define SLIDE_BOT_5C_L              SHFT_UNDO,CTRL_CUT, ALT_COPY, CMD_PASTE,KC_ANGLE
 #define SLIDE_NUM_6C_L    KC_SLEP,  SLIDE_NUM_5C_L
 #define SLIDE_TOP_6C_L    _______,  SLIDE_TOP_5C_L
 #define SLIDE_MID_6C_L    _______,  SLIDE_MID_5C_L
-#define SLIDE_BOT_6C_L    LSFT_T(KC_LBRC),  SLIDE_BOT_5C_L
+#define SLIDE_BOT_6C_L    LSFT_BRC, SLIDE_BOT_5C_L
 
 #define SLIDE_NUM_5C_R    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10
 #define SLIDE_TOP_5C_R    KC_PPLS,  KC_7,     KC_8,     KC_P9,    KC_P0
@@ -49,7 +50,7 @@
 #define SLIDE_NUM_6C_R    SLIDE_NUM_5C_R,     KC_F11
 #define SLIDE_TOP_6C_R    SLIDE_TOP_5C_R,     KC_F12
 #define SLIDE_MID_6C_R    SLIDE_MID_5C_R,     _______
-#define SLIDE_BOT_6C_R    SLIDE_BOT_5C_R,     RSFT_T(KC_RBRC)
+#define SLIDE_BOT_6C_R    SLIDE_BOT_5C_R,     RSFT_BRC
 
 #define SLIDE_THM_2C_L              _______,  _______
 #define SLIDE_THM_3C_L    _______,  SLIDE_THM_2C_L

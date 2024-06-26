@@ -1,9 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "leebyron.h"
 
-// TODO: this must have a better way to do this
-KEY_COMBOS()
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_MAIN] = KEYMAP(LAYOUT,
     MAIN_NUM_6C_L, MAIN_NUM_6C_R,

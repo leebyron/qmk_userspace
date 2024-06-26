@@ -2,11 +2,18 @@
 #include QMK_KEYBOARD_H
 #include "layers.h"
 
+#define MOD_RHYPR (MOD_RGUI | MOD_RALT | MOD_RCTL | MOD_RSFT)
+
+// Hacked keys - use software like Karabiner to remap
+#define KC_FN_MOD  KC_PRINT_SCREEN
+
 // Composite keys used in layers
 
-// System bracket keys
+// Inner column System bracket keys
 #define BRO_SYS   LT(LAYER_SYS, KC_LBRC)
 #define BRC_SYS   LT(LAYER_SYS, KC_RBRC)
+#define TAB_PREV  SGUI(KC_LBRC)
+#define TAB_NEXT  SGUI(KC_RBRC)
 // Thumb keys
 #define ALT_TAB   LALT_T(KC_TAB)
 #define CMD_BKSP  LCMD_T(KC_BSPC)
@@ -24,24 +31,26 @@
 #define ALT_COMMA RALT_T(KC_COMMA)
 #define CTRL_DOT  RCTL_T(KC_DOT)
 #define SHFT_SLSH RSFT_T(KC_SLASH)
-#define MOD_RHYPR (MOD_RGUI | MOD_RALT | MOD_RCTL | MOD_RSFT)
 #define HYPR_QUOT MT(MOD_RHYPR, KC_QUOTE)
 // Nav lower row mods
+#define SHFT_UNDO LT(0, KC_LEFT_SHIFT)
+#define CTRL_CUT  LT(0, KC_LEFT_CTRL)
+#define ALT_COPY  LT(0, KC_LEFT_ALT)
+#define CMD_PASTE LT(0, KC_LEFT_GUI)
 #define CMD_1     RGUI_T(KC_1)
 #define ALT_2     RALT_T(KC_2)
 #define CTRL_3    RCTL_T(KC_3)
 #define SHFT_BKSL RSFT_T(KC_BACKSLASH)
 #define HYPR_TICK MT(MOD_RHYPR, KC_GRAVE)
-// Nav layer holds
-#define SYS_ESC   LT(LAYER_SYS, KC_ESCAPE)
-// Nav commands
-#define UNDO      LCMD(KC_Z)
-#define CUT       LCMD(KC_X)
-#define COPY      LCMD(KC_C)
-#define PASTE     LCMD(KC_V)
-// Sys commands
-#define TAB_PREV  SGUI(KC_LBRC)
-#define TAB_NEXT  SGUI(KC_RBRC)
+// Pinkie mods
+#define SYS_TAB   LT(LAYER_SYS, KC_TAB)
+#define CTRL_ESC  LCTL_T(KC_ESCAPE)
+#define FN_ESC    LT(0, KC_FN_MOD)
+#define HYPR_ENT  MT(MOD_RHYPR, KC_ENTER)
+#define L_SPACECDT QK_SPACE_CADET_LEFT_SHIFT_PARENTHESIS_OPEN
+#define R_SPACECDT QK_SPACE_CADET_RIGHT_SHIFT_PARENTHESIS_CLOSE
+#define LSFT_BRC  LSFT_T(KC_LBRC)
+#define RSFT_BRC  RSFT_T(KC_RBRC)
 // Paired punct
 #define KC_PAREN  KC_LEFT_PAREN
 #define KC_BRACE  KC_LEFT_CURLY_BRACE
