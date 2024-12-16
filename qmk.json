@@ -2,6 +2,7 @@
     "userspace_version": "1.0",
     "build_targets": [
         ["boardsource/technik_o", "leebyron"],
+        ["boardsource/unicorne", "leebyron"],
         ["zsa/voyager", "leebyron"]
     ]
 }
